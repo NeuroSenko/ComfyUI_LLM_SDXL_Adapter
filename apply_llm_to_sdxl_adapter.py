@@ -32,6 +32,7 @@ class ApplyLLMToSDXLAdapter:
             
             # Move tensors to CPU for ComfyUI conditioning system
             conditioning = conditioning.cpu().contiguous()
+            pooled_output = pooled_output.cpu().contiguous()
             
             # Format conditioning for ComfyUI
             # ComfyUI expects conditioning as a list of [cond_tensor, metadata_dict] tuples
