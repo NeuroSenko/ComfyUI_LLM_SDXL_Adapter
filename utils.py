@@ -10,17 +10,21 @@ def get_llm_dict():
     Keys are the names of the LLM checkpoints, values are the paths to the LLM checkpoints.
     """
     llm_dict = {}
-    llm_path = os.path.join(folder_paths.models_dir, "LLM")
+    if "llm" in folder_paths.folder_names_and_paths:
+        llm_paths, _ = folder_paths.folder_names_and_paths["llm"]
+    else:
+        llm_paths = [os.path.join(folder_paths.models_dir, "llm")]
 
-    if os.path.exists(llm_path):
-        for item in os.listdir(llm_path):
-            item_path = os.path.join(llm_path, item)
-            if os.path.isdir(item_path):
-                # Check if it's a valid model directory (contains config.json or similar)
-                if any(f in os.listdir(item_path) for f in ['config.json', 'model.safetensors', 'pytorch_model.bin']):
+    for llm_path in llm_paths:
+        if os.path.exists(llm_path):
+            for item in os.listdir(llm_path):
+                item_path = os.path.join(llm_path, item)
+                if os.path.isdir(item_path):
+                    # Check if it's a valid model directory (contains config.json or similar)
+                    if any(f in os.listdir(item_path) for f in ['config.json', 'model.safetensors', 'pytorch_model.bin']):
+                        llm_dict[item] = item_path
+                elif item.endswith(('.safetensors', '.bin', '.pt')):
                     llm_dict[item] = item_path
-            elif item.endswith(('.safetensors', '.bin', '.pt')):
-                llm_dict[item] = item_path
 
     return llm_dict
     
@@ -30,12 +34,16 @@ def get_adapters_dict():
     Keys are the names of the LLM adapters, values are the paths to the LLM adapters.
     """
     adapters_dict = {}
-    adapters_path = os.path.join(folder_paths.models_dir, "llm_adapters")
+    if "llm_adapters" in folder_paths.folder_names_and_paths:
+        adapters_paths, _ = folder_paths.folder_names_and_paths["llm_adapters"]
+    else:
+        adapters_paths = [os.path.join(folder_paths.models_dir, "llm_adapters")]
 
-    if os.path.exists(adapters_path):
-        for item in os.listdir(adapters_path):
-            if item.endswith('.safetensors'):
-                adapters_dict[item] = os.path.join(adapters_path, item)
+    for adapters_path in adapters_paths:
+        if os.path.exists(adapters_path):
+            for item in os.listdir(adapters_path):
+                if item.endswith('.safetensors'):
+                    adapters_dict[item] = os.path.join(adapters_path, item)
 
     return adapters_dict
 
