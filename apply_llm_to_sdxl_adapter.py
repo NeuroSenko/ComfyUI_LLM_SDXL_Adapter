@@ -30,6 +30,9 @@ class ApplyLLMToSDXLAdapter:
             with torch.no_grad():
                 conditioning, pooled_output = llm_adapter(llm_hidden_states)
             
+            # Move tensors to CPU for ComfyUI conditioning system
+            conditioning = conditioning.cpu().contiguous()
+            
             # Format conditioning for ComfyUI
             # ComfyUI expects conditioning as a list of [cond_tensor, metadata_dict] tuples
             comfy_conditioning = [[conditioning, {"pooled_output": pooled_output}]]
