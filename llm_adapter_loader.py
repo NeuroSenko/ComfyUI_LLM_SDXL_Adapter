@@ -136,11 +136,7 @@ class LLMAdapterLoader:
         except Exception as e:
             logger.error(f"Failed to load adapter: {str(e)}")
             raise Exception(f"Adapter loading failed: {str(e)}")
-    
-    @classmethod
-    def IS_CHANGED(cls, adapter_path, **kwargs):
-        """ComfyUI change detection"""
-        return hash(adapter_path + str(kwargs))
+
 
 
 # Node mapping for ComfyUI registration

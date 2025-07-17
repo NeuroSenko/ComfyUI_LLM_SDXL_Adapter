@@ -84,11 +84,7 @@ class LLMModelLoader:
         except Exception as e:
             logger.error(f"Failed to load Language Model: {str(e)}")
             raise Exception(f"Model loading failed: {str(e)}")
-    
-    @classmethod
-    def IS_CHANGED(cls, model_path, device="auto", force_reload=False):
-        """ComfyUI change detection"""
-        return hash(model_path + device + str(force_reload))
+
 
 
 # Node mapping for ComfyUI registration

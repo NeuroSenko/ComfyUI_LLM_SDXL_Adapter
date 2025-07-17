@@ -47,11 +47,6 @@ class ApplyLLMToSDXLAdapter:
         except Exception as e:
             logger.error(f"Failed to apply adapter: {str(e)}")
             raise Exception(f"Adapter application failed: {str(e)}")
-    
-    @classmethod
-    def IS_CHANGED(cls, llm_hidden_states, llm_adapter):
-        """ComfyUI change detection"""
-        return hash(str(llm_hidden_states.shape) + str(id(llm_adapter)))
 
 
 # Node mapping for ComfyUI registration

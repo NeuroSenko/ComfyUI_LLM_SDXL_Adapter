@@ -90,11 +90,6 @@ class LLMTextEncoder:
         except Exception as e:
             logger.error(f"Failed to encode text: {str(e)}")
             raise Exception(f"Text encoding failed: {str(e)}")
-    
-    @classmethod
-    def IS_CHANGED(cls, model, tokenizer, text, system_prompt="You are expert in understanding of user prompts for image generations. Create an image according to the prompt from user.", skip_first=27):
-        """ComfyUI change detection"""
-        return hash(text + system_prompt + str(skip_first))
 
 
 # Node mapping for ComfyUI registration
