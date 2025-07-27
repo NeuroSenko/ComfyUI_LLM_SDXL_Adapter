@@ -32,11 +32,11 @@ def get_llm_dict():
 
     # 収集したすべてのパスをループ処理
     for llm_path in llm_paths:
-        print(llm_path, "ADFGFDEGSHRJD") # デバッグ用のプリント
         if os.path.exists(llm_path):
             for item in os.listdir(llm_path):
                 item_path = os.path.join(llm_path, item)
                 if os.path.isdir(item_path):
+                    # Check if it's a valid model directory (contains config.json or similar)
                     if any(f in os.listdir(item_path) for f in ['config.json', 'model.safetensors', 'pytorch_model.bin']):
                         llm_dict[item] = item_path
                 elif item.endswith(('.safetensors', '.bin', '.pt')):
