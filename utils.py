@@ -10,13 +10,27 @@ def get_llm_dict():
     Keys are the names of the LLM checkpoints, values are the paths to the LLM checkpoints.
     """
     llm_dict = {}
-    if "llm" in folder_paths.folder_names_and_paths:
-        llm_paths, _ = folder_paths.folder_names_and_paths["llm"]
-    elif os.path.exists(os.path.join(folder_paths.models_dir, "llm")):
-        llm_paths = [os.path.join(folder_paths.models_dir, "llm")]
-    else:
-        llm_paths = [os.path.join(folder_paths.models_dir, "LLM")]
+    llm_paths = [] # 空のリストとして初期化
 
+    # 1. カスタムノードなどで登録されたパスを追加
+    if "llm" in folder_paths.folder_names_and_paths:
+        paths, _ = folder_paths.folder_names_and_paths["llm"]
+        llm_paths.extend(paths) # extendでリストに追加
+
+    # 2. ComfyUIの標準モデルパスを追加
+    default_llm_path = os.path.join(folder_paths.models_dir, "llm")
+    if os.path.exists(default_llm_path):
+        # 重複を避けるため、まだリストになければ追加
+        if default_llm_path not in llm_paths:
+            llm_paths.append(default_llm_path)
+    
+    # 3. 大文字の"LLM"フォルダも念のため確認
+    default_LLM_path_upper = os.path.join(folder_paths.models_dir, "LLM")
+    if os.path.exists(default_LLM_path_upper):
+        if default_LLM_path_upper not in llm_paths:
+            llm_paths.append(default_LLM_path_upper)
+
+    # 収集したすべてのパスをループ処理
     for llm_path in llm_paths:
         if os.path.exists(llm_path):
             for item in os.listdir(llm_path):
