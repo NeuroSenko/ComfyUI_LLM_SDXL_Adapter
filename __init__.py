@@ -66,7 +66,10 @@ try:
     
     from .t5gemma_apply_llm_to_sdxl_adapter import NODE_CLASS_MAPPINGS as T5GEMMA_ADAPTER_NODE_MAPPINGS
     from .t5gemma_apply_llm_to_sdxl_adapter import NODE_DISPLAY_NAME_MAPPINGS as T5GEMMA_ADAPTER_NODE_DISPLAY_MAPPINGS
-    
+
+    from .t5gemma_text_encode_v2 import NODE_CLASS_MAPPINGS as T5GEMMA_TEXT_ENCODE_V2_MAPPINGS
+    from .t5gemma_text_encode_v2 import NODE_DISPLAY_NAME_MAPPINGS as T5GEMMA_TEXT_ENCODE_V2_DISPLAY_MAPPINGS
+
     logger.info("Successfully imported all node modules from separate files")
     
 except Exception as e:
@@ -88,6 +91,7 @@ all_class_mappings = [
     ADAPTER_LOADER_CUSTOM_MAPPINGS,
     ADAPTER_NODE_MAPPINGS,
     T5GEMMA_ADAPTER_NODE_MAPPINGS,
+    T5GEMMA_TEXT_ENCODE_V2_MAPPINGS,
 ]
 
 all_display_mappings = [
@@ -100,6 +104,7 @@ all_display_mappings = [
     ADAPTER_LOADER_CUSTOM_DISPLAY_MAPPINGS,
     ADAPTER_NODE_DISPLAY_MAPPINGS,
     T5GEMMA_ADAPTER_NODE_DISPLAY_MAPPINGS,
+    T5GEMMA_TEXT_ENCODE_V2_DISPLAY_MAPPINGS,
 ]
 
 for mapping in all_class_mappings:
