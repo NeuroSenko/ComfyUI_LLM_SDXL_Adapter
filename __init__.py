@@ -173,13 +173,3 @@ __all__ = [
     "WEB_DIRECTORY",
     "get_node_info"
 ]
-
-# Print initialization message
-print(f"\n{'='*60}")
-print(f"  ComfyUI LLM SDXL Adapter v{__version__} - Loaded Successfully")
-print(f"{'='*60}")
-print(f"  Available Nodes: {len(NODE_CLASS_MAPPINGS)}")
-print(f"  Main Workflow: LLMModelLoader -> LLMTextEncoder -> LLMAdapterLoader -> ApplyLLMToSDXLAdapter -> KSampler")
-print(f"  Supports: Gemma, Llama, Mistral, and other compatible LLMs")
-print(f"  Quick Start: Use modular nodes for flexible workflows")
-print(f"{'='*60}\n") 
