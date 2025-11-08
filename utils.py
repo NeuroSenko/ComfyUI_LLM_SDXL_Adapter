@@ -122,3 +122,41 @@ def get_llm_adapter_path(adapter_name):
         return adapters_dict[adapter_name]
     else:
         raise ValueError(f"Adapter {adapter_name} not found")
+
+def get_llm_safetensors_dict():
+    """
+    Get the dictionary of LLM checkpoints.
+    Keys are the names of the LLM checkpoints, values are the paths to the LLM checkpoints.
+    """
+    llm_paths = []
+    llm_dict = {}
+    if "llm" in folder_paths.folder_names_and_paths:
+        llm_paths, _ = folder_paths.folder_names_and_paths["text_encoders"]
+    elif os.path.exists(os.path.join(folder_paths.models_dir, "text_encoders")):
+        llm_paths = [os.path.join(folder_paths.models_dir, "text_encoders")]
+
+    for llm_path in llm_paths:
+        if os.path.exists(llm_path):
+            for item in os.listdir(llm_path):
+                item_path = os.path.join(llm_path, item)
+                if os.path.isfile(item_path) and item_path.lower().endswith('.safetensors'):
+                    llm_dict[item] = item_path
+
+    return llm_dict
+
+def get_text_encoders():
+    """
+    Get the list of available LLM checkpoints.
+    """
+    return list(get_llm_safetensors_dict().keys())
+
+def get_text_encoder_path(model_name):
+    """
+    Get the path to a text encoder checkpoint.
+    """
+    text_encoder_dict = get_llm_safetensors_dict()
+
+    if model_name in text_encoder_dict:
+        return text_encoder_dict[model_name]
+    else:
+        raise ValueError(f"Text encoder {model_name} not found")

@@ -67,7 +67,7 @@ class LLMAdapterLoader:
                 "n_wide_blocks": 3,
                 "n_narrow_blocks": 3,
                 "num_heads": 16,
-                "dropout": 0.0,
+                "dropout": 0.05,
             },
         }
         
