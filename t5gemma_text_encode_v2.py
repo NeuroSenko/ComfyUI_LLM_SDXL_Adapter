@@ -34,12 +34,6 @@ class T5GEMMATextEncoderV2:
             # Hardcoded parameters
             max_length = 512
             device = "cuda"
-            width = 1024
-            height = 1024
-            target_width = 1024
-            target_height = 1024
-            crop_w = 0
-            crop_h = 0
 
             # Tokenize
             inputs = llm_tokenizer(
@@ -66,12 +60,6 @@ class T5GEMMATextEncoderV2:
             # Build conditioning metadata
             meta = {
                 "pooled_output": pooled_output,
-                "width": width,
-                "height": height,
-                "target_width": target_width,
-                "target_height": target_height,
-                "crop_w": crop_w,
-                "crop_h": crop_h
             }
 
             conditioning = [[prompt_embeds, meta]]
